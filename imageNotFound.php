@@ -58,21 +58,6 @@ $originalFile = $parentDir . '/original/' . $file;
 try{
     $image = new Imagick($originalFile);
 
-//    $cx = round($image->getImageWidth() / 2);
-//    $cy = round($image->getImageHeight() / 2);
-//
-//    $aspect = $image->getImageWidth() / $image->getImageHeight();
-//    $k = 1.778;
-//    if($aspect > 1){
-//        //Too width
-//        $newWidth = round($image->getImageHeight() * $k);
-//
-//        $image->chopImage();
-//    }else{
-//        //Too height
-//
-//    }
-
     //Create new directory for new image
     $parentDir = $parentDir . '/' . $sizeDirName;
     if(!mkdir($parentDir)){
@@ -80,6 +65,28 @@ try{
         return;
     }
 
+    $cx = round($image->getImageWidth() / 2);
+    $cy = round($image->getImageHeight() / 2);
+
+    $aspectFrom = $image->getImageWidth() / $image->getImageHeight();
+    $aspectTo = $sizes[0] / $sizes[1];
+
+    $height = $aspectTo * $image->getImageWidth();
+
+    $width = 0;
+    $height = 0;
+    if($aspectFrom < 1){
+        $width = $image->getImageWidth();
+        $height = round($image->getImageWidth() / $aspectTo);
+    }else{
+        $width = round($image->getImageHeight() * $aspectTo);
+        $height = $image->getImageHeight();
+    }
+
+    $x = round($cx - $width / 2);
+    $y = round($cy - $height / 2);
+
+    $image->cropImage($width, $height, $x, $y);
     $image->thumbnailImage($sizes[0], $sizes[1]);
     $image->writeImage($parentDir . '/' . $file);
 
