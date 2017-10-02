@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * @var array
+ */
+return
+[
+    'extensions' =>
+    [
+        'jpg',
+        'jpeg',
+        'png',
+        'gif'
+    ],
+    'minimal' =>
+    [
+        'size' => 1024, // 1 KB
+        'width' => 16,
+        'height' => 16
+    ],
+    'maximal' =>
+    [
+        'size' => 20 * 1024 * 1024, // 20 MB
+        'width' => 16000,
+        'height' => 9000
+    ],
+    'sizes' =>
+    [
+        '200x200',
+        '1024x768'
+    ],
+    'maximalQuantity' => 10,
+    'baseDirectory' => __DIR__ . '/../files/images'
+];

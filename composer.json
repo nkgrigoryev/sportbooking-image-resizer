@@ -1,0 +1,31 @@
+{
+  "name": "sportbooking/static",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload":
+  {
+    "psr-4":
+    {
+      "sportbooking\\": "./sportbooking"
+    }
+  },
+  "config":
+  {
+    "fxp-asset":
+    {
+      "installer-paths":
+      {
+        "bower-asset-library": "vendor/bower"
+      }
+    }
+  },
+  "require":
+  {
+    "php": ">=7.1"
+  },
+  "require-dev":
+  {
+    "phpunit/phpunit": "^6",
+    "yiisoft/yii2-apidoc": "^2"
+  }
+}

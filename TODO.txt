@@ -1,0 +1,7 @@
+Add messages to exceptions class.
+Add parameters to some exceptions.
+Move folder permissions "755" from ImageSaver.php to config.php.
+Close uploading. Make access by token. Add token in config.php.
+Add more exceptions in UploaderWeb. Add examples of errors to README.md.
+Update config examples in all doc blocks.
+Uploader::getImagesDataInArray() must return "key" from images array. images['avatar'] must return 'avatar'.
