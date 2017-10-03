@@ -25,6 +25,7 @@ Copy configs
 ```bash
 cp phpunit.xml.dist phpunit.xml
 cp config/config.php.dist config/config.php
+cp config/tokens.php.dist config/tokens.php
 ```
 
 Copy and modify NGINX config
@@ -39,7 +40,7 @@ sudo nano /etc/nginx/conf.d/static.sportbooking.com.conf
 
 Upload single image
 ```bash
-curl -F "images=@/home/user/Desktop/test.png" static.sportbooking.com/upload-images
+curl -F "images=@/home/user/Desktop/test.png" -F "token=xxxxxxxxxxxxxxxx" static.sportbooking.com/upload-images
 ```
 ```json
 {
@@ -59,7 +60,7 @@ curl -F "images=@/home/user/Desktop/test.png" static.sportbooking.com/upload-ima
 
 Upload two images
 ```bash
-curl -F "images[0]=@/home/user/Desktop/test.png" -F "images['second']=@/home/user/Desktop/test2.jpg" static.sportbooking.com/upload-images
+curl -F "images[0]=@/home/user/Desktop/test.png" -F "images['second']=@/home/user/Desktop/test2.jpg" -F "token=xxxxxxxxxxxxxxxx" static.sportbooking.com/upload-images
 ```
 ```json
 {
@@ -94,6 +95,7 @@ Upload single image
     
 $data = 
 [
+    'token' => 'xxxxxxxxxxxxxxxx',
     'images' => curl_file_create('/home/user/Desktop/test.png', 'image/png')
 ];
     
@@ -111,6 +113,7 @@ Upload two images
     
 $data = 
 [
+    'token' => 'xxxxxxxxxxxxxxxx',
     'images[0]' => curl_file_create('/home/user/Desktop/test.png', 'image/png'),
     'images[second]' => curl_file_create('/home/user/Desktop/test2.jpg', 'image/jpg')
 ];

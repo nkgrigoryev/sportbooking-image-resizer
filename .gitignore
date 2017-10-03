@@ -6,6 +6,7 @@ phpunit.xml
 
 # Config
 config/config.php
+config/tokens.php
 
 # Documentation
 docs

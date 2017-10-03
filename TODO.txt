@@ -1,5 +1,4 @@
 Add messages to exceptions class.
 Add parameters to some exceptions.
-Close uploading. Make access by token. Add token in config.php.
 Add more exceptions in UploaderWeb. Add examples of errors to README.md.
 Update config examples in all doc blocks.

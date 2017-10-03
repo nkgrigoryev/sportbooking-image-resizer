@@ -44,19 +44,30 @@ class UploaderWeb
         InvalidInputDataException::class => self::INVALID_INPUT_DATA
     ];
 
+    // TODO Refactoring
     // TODO config example
+    // TODO example tokens
     /**
      * UploaderWeb constructor.
      * @param array $config
+     * @param array $tokens
      */
     public function __construct
     (
-        array $config
+        array $config,
+        array $tokens
     )
     {
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') $this->_echoError('INVALID_HTTP_METHOD' , 'Invalid HTTP-method. Use POST.');
+        if (!isset($_POST['token'])) $this->_echoError('TOKEN_DO_NOT_SET' , 'Parameter "token" do not set.');
+        if (!is_string($_POST['token'])) $this->_echoError('TOKEN_IN_NOT_STRING' , 'Parameter "token" must be string.');
+        $token = $_POST['token'];
+
+        if (!in_array($token, $tokens)) $this->_echoError('INVALID_TOKEN' , 'Invalid token.');
+
         // TODO move files getting to another class.
         $files = $_FILES['images'] ?? [];
-        if (!is_array($files)) $this->_echoError('IMAGE_MUST_BE_ARRAY' , 'Parameter "images" must be array');
+        if (!is_array($files)) $this->_echoError('IMAGE_MUST_IS_NO_ARRAY' , 'Parameter "images" must be array.');
         try
         {
             $uploader = new Uploader($config, $files);
@@ -99,6 +110,7 @@ class UploaderWeb
             ]
         ];
         echo json_encode($result, JSON_PRETTY_PRINT) . PHP_EOL;
+        die();
     }
 
     // TODO dockblock
@@ -113,5 +125,6 @@ class UploaderWeb
             'result' => $result,
         ];
         echo json_encode($result,  JSON_PRETTY_PRINT) . PHP_EOL;
+        die();
     }
 }
