@@ -225,7 +225,7 @@ class ImageSaverTest extends TestCase
         $this->assertEquals($imageSaver->getSize(), 76949);
     }
 
-    public function testTrue()
+    public function testSuccess()
     {
         $this->copyImages();
         $config =
