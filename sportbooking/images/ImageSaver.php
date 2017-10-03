@@ -162,7 +162,7 @@ class ImageSaver implements ImageDataInterface
      */
     public function save():bool
     {
-        if (!is_dir($this->_directoryFullPath)) mkdir($this->_directoryFullPath, 0775, true);
+        if (!is_dir($this->_directoryFullPath)) mkdir($this->_directoryFullPath, $this->_config->getPermissions(), true);
         $fullTargetPath = $this->_config->getBaseDirectory() . $this->_relativePath;
         return $this->_mover::move($this->_temporaryName, $fullTargetPath);
     }

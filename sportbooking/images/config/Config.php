@@ -18,6 +18,11 @@ class Config
     const DEFAULT_MAXIMAL_QUANTITY = 10;
 
     /**
+     * Default maximal quantity.
+     */
+    const DEFAULT_PERMISSIONS = 0775;
+
+    /**
      * @var ExtensionsConfig
      */
     private $_extensions;
@@ -48,12 +53,18 @@ class Config
     private $_baseDirectory;
 
     /**
+     * @var int
+     */
+    private $_permissions;
+
+    /**
      * Config constructor.
      * @param array $config Example:
      *     [
      *         'extensions' =>
      *         [
      *             'jpg',
+     *             'jpeg',
      *             'png'
      *         ],
      *         'minimal' =>
@@ -74,7 +85,8 @@ class Config
      *             '1024x768'
      *         ],
      *         'maximalQuantity' => 10,
-     *         'baseDirectory' => __DIR__ . '/../files/images'
+     *         'baseDirectory' => __DIR__ . '/../files/images',
+     *         'permissions' => 775
      *     ];
      * @throws BaseDirectoryDoNotSetException
      * @throws BaseDirectoryDoNotExistException
@@ -89,6 +101,7 @@ class Config
         $sizesData = $config['sizes'] ?? [];
         $maximalQuantityData = $config['maximalQuantity'] ?? self::DEFAULT_MAXIMAL_QUANTITY;
         $baseDirectory = $config['baseDirectory'] ?? null;
+        $permissions = $config['permissions'] ?? self::DEFAULT_PERMISSIONS;
 
         if (!$baseDirectory) throw new BaseDirectoryDoNotSetException('Invalid config. "baseDirectory" do not set in config.');
         if (!file_exists($baseDirectory)) throw new BaseDirectoryDoNotExistException('Invalid config. Base directory ' . $baseDirectory . ' do not exist.');
@@ -101,6 +114,7 @@ class Config
         $this->_sizes = new SizesConfig($sizesData);
         $this->_maximalQuantity = $maximalQuantityData;
         $this->_baseDirectory = $baseDirectory;
+        $this->_permissions = $permissions;
     }
 
     /**
@@ -155,5 +169,14 @@ class Config
     public function getBaseDirectory():string
     {
         return $this->_baseDirectory;
+    }
+
+    /**
+     * Return permission. Example: 0775
+     * @return int
+     */
+    public function getPermissions():int
+    {
+        return $this->_permissions;
     }
 }

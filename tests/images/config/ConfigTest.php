@@ -79,4 +79,16 @@ class ConfigTest extends TestCase
         $config = new Config($config);
         $this->assertEquals($directory, $config->getBaseDirectory());
     }
+
+    public function testPermissions()
+    {
+        $permissions = 2775;
+        $config =
+        [
+            'baseDirectory' => __DIR__ . '/assets/upload',
+            'permissions' => 2775
+        ];
+        $config = new Config($config);
+        $this->assertEquals($permissions, $config->getPermissions());
+    }
 }

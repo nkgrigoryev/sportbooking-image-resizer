@@ -30,5 +30,6 @@ return
         '1024x768'
     ],
     'maximalQuantity' => 10,
-    'baseDirectory' => __DIR__ . '/../files/images'
+    'baseDirectory' => __DIR__ . '/../files/images',
+    'permissions' => 0775
 ];
