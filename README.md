@@ -91,7 +91,7 @@ Upload single image
     
 $data = 
 [
-    'images' => curl_file_create('/home/nkgrigoryev/Desktop/test.png', 'image/png')
+    'images' => curl_file_create('/home/user/Desktop/test.png', 'image/png')
 ];
     
 $curl = curl_init();
@@ -108,8 +108,8 @@ Upload two images
     
 $data = 
 [
-    'images[0]' => curl_file_create('/home/nkgrigoryev/Desktop/test.png', 'image/png'),
-    'images[1]' => curl_file_create('/home/nkgrigoryev/Desktop/test2.jpg', 'image/jpg')
+    'images[0]' => curl_file_create('/home/user/Desktop/test.png', 'image/png'),
+    'images[1]' => curl_file_create('/home/user/Desktop/test2.jpg', 'image/jpg')
 ];
     
 $curl = curl_init();
