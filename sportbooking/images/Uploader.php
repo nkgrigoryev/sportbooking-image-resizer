@@ -78,7 +78,8 @@ class Uploader
                 'type' => $saver->getType(),
                 'width' => $saver->getWidth(),
                 'height' => $saver->getHeight(),
-                'size' => $saver->getSize()
+                'size' => $saver->getSize(),
+                'key' => $saver->getKey()
             ];
             array_push($result, $data);
         }

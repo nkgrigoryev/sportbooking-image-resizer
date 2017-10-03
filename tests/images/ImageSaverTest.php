@@ -30,7 +30,8 @@ class ImageSaverTest extends TestCase
             '256x256.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/256x256.png',
-            1
+            1,
+            'logo'
         );
     }
 
@@ -55,7 +56,8 @@ class ImageSaverTest extends TestCase
             '256x256.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/256x256.png',
-            0
+            0,
+            'logo'
         );
     }
 
@@ -79,7 +81,8 @@ class ImageSaverTest extends TestCase
             'invalid_image.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/invalid_image.png',
-            0
+            0,
+            'logo'
         );
     }
 
@@ -108,7 +111,8 @@ class ImageSaverTest extends TestCase
             '256x256.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/256x256.png',
-            0
+            0,
+            'logo'
         );
     }
 
@@ -136,7 +140,8 @@ class ImageSaverTest extends TestCase
             '256x256.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/256x256.png',
-            0
+            0,
+            'logo'
         );
     }
 
@@ -165,7 +170,8 @@ class ImageSaverTest extends TestCase
             '256x256.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/256x256.png',
-            0
+            0,
+            'logo'
         );
     }
 
@@ -193,7 +199,8 @@ class ImageSaverTest extends TestCase
             '256x256.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/256x256.png',
-            0
+            0,
+            'logo'
         );
     }
 
@@ -216,13 +223,15 @@ class ImageSaverTest extends TestCase
             '256x256.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/256x256.png',
-            0
+            0,
+            'logo'
         );
         $this->assertEquals($imageSaver->getName(), '256x256.png');
         $this->assertEquals($imageSaver->getType(), 'image/png');
         $this->assertEquals($imageSaver->getWidth(), 256);
         $this->assertEquals($imageSaver->getHeight(), 256);
         $this->assertEquals($imageSaver->getSize(), 76949);
+        $this->assertEquals($imageSaver->getKey(), 'logo');
     }
 
     public function testSuccess()
@@ -244,7 +253,8 @@ class ImageSaverTest extends TestCase
             '256x256.png',
             'image/png',
             __DIR__ . '/assets/images/tmp/256x256.png',
-            0
+            0,
+            'logo'
         );
         $result = $imageSaver->save();
         $this->assertTrue($result);

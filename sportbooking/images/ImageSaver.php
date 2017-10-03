@@ -79,6 +79,11 @@ class ImageSaver implements ImageDataInterface
     private $_size;
 
     /**
+     * @var int|string
+     */
+    private $_key;
+
+    /**
      * @var string
      */
     private $_directoryFullPath;
@@ -101,6 +106,10 @@ class ImageSaver implements ImageDataInterface
      *     '/tmp/Xcd45'
      * @param int $error Example:
      *     0
+     * @param int|string $key Example:
+     *     0
+     *     '0'
+     *     'avatar'
      * @link http://www.php.net/manual/en/features.file-upload.errors.php
      * @see SafeMover, MoverInterface
      * @throws PHPUploadErrorException
@@ -117,7 +126,8 @@ class ImageSaver implements ImageDataInterface
         string $name,
         string $type,
         string $temporaryName,
-        int $error
+        int $error,
+        $key
     )
     {
         $this->_config = $config;
@@ -126,6 +136,7 @@ class ImageSaver implements ImageDataInterface
         $this->_type = $type;
         $this->_temporaryName = $temporaryName;
         $this->_error = $error;
+        $this->_key = $key;
 
         if ($this->_error != UPLOAD_ERR_OK) throw new PHPUploadErrorException();
 
@@ -225,6 +236,17 @@ class ImageSaver implements ImageDataInterface
     public function getSize():string
     {
         return $this->_size;
+    }
+
+    /**
+     * Return image key.
+     * @return int|string Example:
+     *     0
+     *     'avatar'
+     */
+    public function getKey()
+    {
+        return $this->_key;
     }
 
     /**

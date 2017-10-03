@@ -50,7 +50,8 @@ curl -F "images=@/home/user/Desktop/test.png" static.sportbooking.com/upload-ima
             "type": "application\/octet-stream",
             "width": "256",
             "height": "256",
-            "size": "76949"
+            "size": "76949",
+            "key": 0
         }
     ]
 }
@@ -58,7 +59,7 @@ curl -F "images=@/home/user/Desktop/test.png" static.sportbooking.com/upload-ima
 
 Upload two images
 ```bash
-curl -F "images[]=@/home/user/Desktop/test.png" -F "images[]=@/home/user/Desktop/test2.jpg" static.sportbooking.com/upload-images
+curl -F "images[0]=@/home/user/Desktop/test.png" -F "images['second']=@/home/user/Desktop/test2.jpg" static.sportbooking.com/upload-images
 ```
 ```json
 {
@@ -69,7 +70,8 @@ curl -F "images[]=@/home/user/Desktop/test.png" -F "images[]=@/home/user/Desktop
             "type": "application\/octet-stream",
             "width": "256",
             "height": "256",
-            "size": "76949"
+            "size": "76949",
+            "key": 0
         },
         {
             "name": "test2.jpg",
@@ -77,7 +79,8 @@ curl -F "images[]=@/home/user/Desktop/test.png" -F "images[]=@/home/user/Desktop
             "type": "image\/jpeg",
             "width": "400",
             "height": "400",
-            "size": "41095"
+            "size": "41095",
+            "key": "second"
         }
     ]
 }
@@ -109,7 +112,7 @@ Upload two images
 $data = 
 [
     'images[0]' => curl_file_create('/home/user/Desktop/test.png', 'image/png'),
-    'images[1]' => curl_file_create('/home/user/Desktop/test2.jpg', 'image/jpg')
+    'images[second]' => curl_file_create('/home/user/Desktop/test2.jpg', 'image/jpg')
 ];
     
 $curl = curl_init();

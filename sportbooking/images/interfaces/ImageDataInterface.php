@@ -49,4 +49,12 @@ interface ImageDataInterface
      *     256
      */
     public function getSize():string;
+
+    /**
+     * Return image key.
+     * @return int|string Example:
+     *     0
+     *     'avatar'
+     */
+    public function getKey();
 }

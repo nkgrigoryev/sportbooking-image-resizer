@@ -50,9 +50,34 @@ class ImagesSaver
      *             0
      *         ]
      *     ]
+     *
+     * One more example:
+     *     [
+     *         'name' =>
+     *         [
+     *             'avatar' => 'firefox_3.5_logo_256x256.png',
+     *             'background' => 'wallpaper.jpg'
+     *         ],
+     *         'type' =>
+     *         [
+     *             'avatar' => 'image/png',
+     *             'background' => 'image/jpg'
+     *         ],
+     *         'tmp_name' =>
+     *         [
+     *             'avatar' => __DIR__ . '/assets/images/firefox_3.5_logo_256x256.png',
+     *             'background' => __DIR__ . '/assets/images/01_3200x1800.jpg'
+     *         ],
+     *         'error' =>
+     *         [
+     *             'avatar' => 0,
+     *             'background' => 0
+     *         ]
+     *     ]
      * @param MoverInterface $mover Use SafeMover for production and UnsafeMover for tests.
      * @throws NoImagesException
      * @throws MaximalQuantityException
+     * @throws InvalidInputDataException
      */
     public function __construct
     (
@@ -81,7 +106,8 @@ class ImagesSaver
                 $name,
                 $type,
                 $temporaryName,
-                $error
+                $error,
+                0
             );
             array_push($this->_savers, $saver);
         }
@@ -102,7 +128,8 @@ class ImagesSaver
                     $name,
                     $type,
                     $temporaryName,
-                    $error
+                    $error,
+                    $key
                 );
                 array_push($this->_savers, $saver);
             }
