@@ -21,7 +21,7 @@
     "github-protocols": ["https","http"],
     "github-oauth":
     {
-      "github.com": "aa9a906cf406370b509bbce3a78829202b41b8e6"
+      "github.com": "5e47afeb1c0df4aa1a501e43518e13b761e3b64d"
     }
   },
   "require":
