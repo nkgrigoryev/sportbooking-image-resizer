@@ -2,3 +2,4 @@ Add messages to exceptions class.
 Add parameters to some exceptions.
 Add more exceptions in UploaderWeb. Add examples of errors to README.md.
 Update config examples in all doc blocks.
+Output errors messages in uploader.

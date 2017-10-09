@@ -18,7 +18,7 @@ cd /your/project/directory/
 
 Install by composer
 ```bash
-composer install
+composer update
 ```
 
 Copy configs
