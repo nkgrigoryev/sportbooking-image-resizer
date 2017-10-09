@@ -14,9 +14,9 @@ class Requirements
 
     public static function validate()
     {
-        if (version_compare(phpversion(), self::MINIMAL_PHP_VERSION, '<'))
+        if (version_compare(phpversion(), self::MINIMAL_PHP_VERSION, '<='))
             throw new PHPVersionException();
-        if (!class_exists("Imagick"))
+        if (!class_exists('Imagick'))
             throw new ImagickIsNotInstalledException();
     }
 }
