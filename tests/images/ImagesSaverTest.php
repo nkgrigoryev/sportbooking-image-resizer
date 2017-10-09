@@ -80,7 +80,38 @@ class ImagesSaverTest extends TestCase
         );
     }
 
-    public function testTrue()
+    public function testSingleImage()
+    {
+        $this->copyImages();
+        $config =
+        [
+            'extensions' =>
+            [
+                'jpg'
+            ],
+            'baseDirectory' => __DIR__ . '/assets/upload'
+        ];
+        $files =
+        [
+            'name' => '01_3200x1800.jpg',
+            'type' => 'image/jpg',
+            'tmp_name' => __DIR__ . '/assets/images/tmp/01_3200x1800.jpg',
+            'error' => 0
+        ];
+        $config = new Config($config);
+        $imagesSaver = new ImagesSaver
+        (
+            $config,
+            $files,
+            new UnsafeMover()
+        );
+        $result = $imagesSaver->save();
+        $this->assertTrue($result);
+        $this->assertTrue(is_file($config->getBaseDirectory() . $imagesSaver->getImageData(0)->getRelativePath()));
+        $this->assertEquals(1, $imagesSaver->getImagesLength());
+    }
+
+    public function testThreeImages()
     {
         $this->copyImages();
         $config =
