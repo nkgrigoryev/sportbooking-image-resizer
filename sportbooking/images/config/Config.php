@@ -172,7 +172,7 @@ class Config
     }
 
     /**
-     * Return permission. Example: 0775
+     * Return UNIX permissions. Example: 2775
      * @return int
      */
     public function getPermissions():int
