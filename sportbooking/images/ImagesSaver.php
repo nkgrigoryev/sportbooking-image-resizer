@@ -165,12 +165,14 @@ class ImagesSaver
 
     /**
      * Return ImageDataInterface object.
-     * @param int $index No mew then getImagesLength(). Example:
+     * @param int|string $key No mew then getImagesLength(). Example:
      *     0
+     *
+     *     'avatar'
      * @return ImageDataInterface
      */
-    public function getImageData(int $index):ImageDataInterface
+    public function getImageData($key):ImageDataInterface
     {
-        return $this->_savers[$index];
+        return $this->_savers[$key];
     }
 }
