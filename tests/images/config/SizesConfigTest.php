@@ -18,7 +18,7 @@ class SizesConfigTest extends TestCase
         $sizesConfig->getSize('100x100');
     }
 
-    public function testValidConfig()
+    public function testWidth()
     {
         $config =
         [
@@ -27,8 +27,16 @@ class SizesConfigTest extends TestCase
         ];
         $sizesConfig = new SizesConfig($config);
         $this->assertEquals($sizesConfig->getSize('800x600')->getWidth(), 800);
+    }
+
+    public function testHeight()
+    {
+        $config =
+        [
+            '800x600',
+            '400x400'
+        ];
+        $sizesConfig = new SizesConfig($config);
         $this->assertEquals($sizesConfig->getSize('800x600')->getHeight(), 600);
-        $this->assertEquals($sizesConfig->getSize('400x400')->getWidth(), 400);
-        $this->assertEquals($sizesConfig->getSize('400x400')->getHeight(), 400);
     }
 }

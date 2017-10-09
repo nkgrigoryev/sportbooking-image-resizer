@@ -55,18 +55,19 @@ class ConfigTest extends TestCase
             'baseDirectory' => __DIR__ . '/assets/upload'
         ];
         $config = new Config($config);
-        $this->assertEquals(10, $config->getMaximalQuantity());
+        $this->assertEquals(Config::DEFAULT_MAXIMAL_QUANTITY, $config->getMaximalQuantity());
     }
 
     public function testMaximalQuantity()
     {
+        $maximalQuantity = 25;
         $config =
         [
-            'maximalQuantity' => 25,
+            'maximalQuantity' => $maximalQuantity,
             'baseDirectory' => __DIR__ . '/assets/upload'
         ];
         $config = new Config($config);
-        $this->assertEquals(25, $config->getMaximalQuantity());
+        $this->assertEquals($maximalQuantity, $config->getMaximalQuantity());
     }
 
     public function testBaseDirectory()
@@ -86,7 +87,7 @@ class ConfigTest extends TestCase
         $config =
         [
             'baseDirectory' => __DIR__ . '/assets/upload',
-            'permissions' => 2775
+            'permissions' => $permissions
         ];
         $config = new Config($config);
         $this->assertEquals($permissions, $config->getPermissions());

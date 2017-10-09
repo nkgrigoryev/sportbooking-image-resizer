@@ -24,17 +24,15 @@ class SizeConfigTest extends TestCase
         new SizeConfig('800x600x500');
     }
 
-    public function testSizeOne()
+    public function testWidth()
     {
         $sizeConfig = new SizeConfig('800x600');
         $this->assertEquals($sizeConfig->getWidth(), 800);
-        $this->assertEquals($sizeConfig->getHeight(), 600);
     }
 
-    public function testSizeTwo()
+    public function testHeight()
     {
         $sizeConfig = new SizeConfig('1024x768');
-        $this->assertEquals($sizeConfig->getWidth(), 1024);
         $this->assertEquals($sizeConfig->getHeight(), 768);
     }
 }
