@@ -5,7 +5,7 @@ use Error;
 use Exception;
 use sportbooking\images\exceptions\InvalidInputDataException;
 use sportbooking\images\exceptions\NoImagesException;
-
+use sportbooking\images\requirements\Requirements;
 
 // TODO вынести _echoError и _echoResult в отдельный класс. Написать тесты на этот класс.
 /**
@@ -58,18 +58,21 @@ class UploaderWeb
         array $tokens
     )
     {
-        if ($_SERVER['REQUEST_METHOD'] != 'POST') $this->_echoError('INVALID_HTTP_METHOD' , 'Invalid HTTP-method. Use POST.');
-        if (!isset($_POST['token'])) $this->_echoError('TOKEN_DO_NOT_SET' , 'Parameter "token" do not set.');
-        if (!is_string($_POST['token'])) $this->_echoError('TOKEN_IN_NOT_STRING' , 'Parameter "token" must be string.');
-        $token = $_POST['token'];
-
-        if (!in_array($token, $tokens)) $this->_echoError('INVALID_TOKEN' , 'Invalid token.');
-
-        // TODO move files getting to another class.
-        $files = $_FILES['images'] ?? [];
-        if (!is_array($files)) $this->_echoError('IMAGE_MUST_IS_NO_ARRAY' , 'Parameter "images" must be array.');
         try
         {
+            Requirements::validate();
+            // TODO Move to validator.
+            if ($_SERVER['REQUEST_METHOD'] != 'POST') $this->_echoError('INVALID_HTTP_METHOD' , 'Invalid HTTP-method. Use POST.');
+            if (!isset($_POST['token'])) $this->_echoError('TOKEN_DO_NOT_SET' , 'Parameter "token" do not set.');
+            if (!is_string($_POST['token'])) $this->_echoError('TOKEN_IN_NOT_STRING' , 'Parameter "token" must be string.');
+            $token = $_POST['token'];
+
+            if (!in_array($token, $tokens)) $this->_echoError('INVALID_TOKEN' , 'Invalid token.');
+
+            // TODO move files getting to another class.
+            $files = $_FILES['images'] ?? [];
+            if (!is_array($files)) $this->_echoError('IMAGE_MUST_IS_NO_ARRAY' , 'Parameter "images" must be array.');
+
             $uploader = new Uploader($config, $files);
             $uploader->upload();
             $result = $uploader->getImagesDataInArray();
@@ -78,18 +81,17 @@ class UploaderWeb
         catch (Exception $exception)
         {
             $code = self::UNKNOWN_ERROR_CODE;
-            $message = self::UNKNOWN_ERROR_MESSAGE;
+            $message = $exception->getMessage();
             $exceptionClass = get_class($exception);
             if (isset(self::$_exceptions[$exceptionClass]))
             {
                 $code = self::$_exceptions[$exceptionClass];
-                $message = $exception->getMessage();
             }
             $this->_echoError($code, $message);
         }
         catch (Error $error)
         {
-            $this->_echoError(self::UNKNOWN_ERROR_CODE, self::UNKNOWN_ERROR_MESSAGE);
+            $this->_echoError(self::UNKNOWN_ERROR_CODE, $error->getMessage());
         }
     }
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace sportbooking\images\exceptions;
+namespace sportbooking\images\data\exceptions;
 use Exception;
 
 /**
  * Class PHPUploadErrorException
- * @package sportbooking\images\exceptions
+ * @package sportbooking\images\data\exceptions
  */
 class PHPUploadErrorException extends Exception {}
 
